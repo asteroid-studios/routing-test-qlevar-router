@@ -8,6 +8,7 @@ class DiscoverRoutes {
   final routes = QRoute(
     name: discover,
     path: discover,
+    pageType: const QFadePage(),
     middleware: [QMiddlewareBuilder()],
     builder: () => const DiscoverPage(),
   );

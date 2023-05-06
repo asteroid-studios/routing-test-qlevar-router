@@ -1,4 +1,3 @@
-
 import 'package:qlevar_router/qlevar_router.dart';
 
 import 'package:routing_test/features/you/pages/settings/settings_page.dart';
@@ -13,6 +12,7 @@ class YouRoutes {
     path: '/you',
     middleware: [QMiddlewareBuilder()],
     builder: () => const YouPage(),
+    pageType: const QFadePage(),
     children: [
       QRoute(
         name: settings,

@@ -1,4 +1,3 @@
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import 'package:routing_test/components/app/routing/app_routes.dart';
@@ -11,6 +10,7 @@ class AuthRoutes {
   final routes = QRoute(
     name: login,
     path: login,
+    pageType: const QFadePage(),
     middleware: [QMiddlewareBuilder()],
     builder: () => const LoginPage(),
   );
