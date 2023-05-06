@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:qlevar_router/qlevar_router.dart';
 
-import 'package:routing_test/features/home/routing/routes.dart';
+import 'package:routing_test/features/home/routing/home_routes.dart';
 
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({super.key});

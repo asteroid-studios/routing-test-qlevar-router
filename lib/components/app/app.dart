@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:qlevar_router/qlevar_router.dart';
-
-import 'package:routing_test/components/app/routing/router.dart';
+import 'package:routing_test/components/app/routing/app_router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,8 +8,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routeInformationParser: const QRouteInformationParser(),
-      routerDelegate: router,
+      routeInformationParser: AppRouter.parser,
+      routerDelegate: AppRouter().router,
     );
   }
 }

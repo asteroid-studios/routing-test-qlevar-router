@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:qlevar_router/qlevar_router.dart';
 
-import 'package:routing_test/features/auth/routing/routes.dart';
-import 'package:routing_test/features/home/routing/routes.dart';
-import 'package:routing_test/features/you/routing/routes.dart';
+import 'package:routing_test/features/auth/routing/auth_routes.dart';
+import 'package:routing_test/features/community/routing/community_routes.dart';
+import 'package:routing_test/features/discover/routing/discover_routes.dart';
+import 'package:routing_test/features/home/routing/home_routes.dart';
+import 'package:routing_test/features/you/routing/you_routes.dart';
 
-class Shell extends StatelessWidget {
+class Shell extends StatefulWidget {
   const Shell({
     required this.router,
     super.key,
@@ -15,57 +17,83 @@ class Shell extends StatelessWidget {
   final QRouter router;
 
   @override
+  State<Shell> createState() => _ShellState();
+}
+
+class _ShellState extends State<Shell> {
+  int navBarIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          Expanded(child: router),
+          Expanded(child: widget.router),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: 80,
-        color: Colors.black,
-        child: Row(
-          children: [
-            Expanded(
-              child: IconButton(
-                onPressed: () {
-                  if (QR.currentPath.contains(HomeRoutes.home)) {
-                    QR.toName(HomeRoutes.home);
-                  } else {
-                    QR.toName(
-                      HomeRoutes.home,
-                      pageAlreadyExistAction: PageAlreadyExistAction.BringToTop,
-                    );
-                  }
-                },
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
+        unselectedItemColor: Colors.lightBlueAccent,
+        currentIndex: navBarIndex,
+        onTap: (index) {
+          final item = navBarItems[index];
+          if (QR.currentPath.contains(item.route)) {
+            QR.toName(item.route);
+          } else {
+            QR.toName(
+              item.route,
+              pageAlreadyExistAction: PageAlreadyExistAction.BringToTop,
+            );
+          }
+          setState(() => navBarIndex = index);
+        },
+        items: navBarItems
+            .map(
+              (i) => BottomNavigationBarItem(
+                backgroundColor: Colors.blue,
+                label: i.label,
                 icon: Icon(
-                  Icons.home,
-                  color: Colors.white,
+                  i.icon,
                 ),
               ),
-            ),
-            Expanded(
-              child: IconButton(
-                onPressed: () {
-                  if (QR.currentPath.contains(YouRoutes.you)) {
-                    QR.toName(YouRoutes.you);
-                  } else {
-                    QR.toName(
-                      YouRoutes.you,
-                      pageAlreadyExistAction: PageAlreadyExistAction.BringToTop,
-                    );
-                  }
-                },
-                icon: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
+            )
+            .toList(),
       ),
     );
   }
+}
+
+const navBarItems = [
+  NavItem(
+    label: 'Home',
+    icon: Icons.home,
+    route: HomeRoutes.home,
+  ),
+  NavItem(
+    label: 'Discover',
+    icon: Icons.audiotrack_outlined,
+    route: DiscoverRoutes.discover,
+  ),
+  NavItem(
+    label: 'Community',
+    icon: Icons.chat,
+    route: CommunityRoutes.community,
+  ),
+  NavItem(
+    label: 'You',
+    icon: Icons.person,
+    route: YouRoutes.you,
+  ),
+];
+
+class NavItem {
+  const NavItem({
+    required this.label,
+    required this.icon,
+    required this.route,
+  });
+
+  final IconData icon;
+  final String route;
+  final String label;
 }
