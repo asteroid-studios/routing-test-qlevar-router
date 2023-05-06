@@ -9,14 +9,14 @@ class YouRoutes {
 
   final routes = QRoute(
     name: you,
-    path: '/you',
+    path: you,
     middleware: [QMiddlewareBuilder()],
     builder: () => const YouPage(),
     pageType: const QFadePage(),
     children: [
       QRoute(
         name: settings,
-        path: 'settings',
+        path: settings,
         middleware: [QMiddlewareBuilder()],
         builder: () => const SettingsPage(),
       ),

@@ -21,7 +21,7 @@ class DiscoverPage extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               QR.toName(
-                DiscoverRoutes.player,
+                DiscoverRoutes.content,
                 params: {'id': '1'},
               );
             },
@@ -32,7 +32,7 @@ class DiscoverPage extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               QR.toName(
-                DiscoverRoutes.player,
+                DiscoverRoutes.content,
                 params: {'id': '2'},
               );
             },
