@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:qlevar_router/qlevar_router.dart';
 
@@ -11,6 +12,8 @@ class AppRouter {
   static init() {
     QR.settings.enableLog = false;
     QR.settings.globalMiddlewares.add(AuthMiddleware());
+    QR.settings.autoRestoration = true;
+    QR.settings.initPage = CircularProgressIndicator();
     QR.settings.notFoundPage = QRoute(
       path: '/404',
       builder: () => const NotFoundPage(),

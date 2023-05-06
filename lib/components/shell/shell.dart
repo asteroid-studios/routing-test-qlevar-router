@@ -21,7 +21,18 @@ class Shell extends StatefulWidget {
 }
 
 class _ShellState extends State<Shell> {
-  int navBarIndex = 0;
+  late int navBarIndex;
+
+  @override
+  void initState() {
+    // TODO listen to route changes and update navBarIndex
+    // for back button navigation
+    final index = navBarItems.indexWhere(
+      (item) => QR.currentPath.contains(item.route),
+    );
+    navBarIndex = index == -1 ? 0 : index;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
