@@ -3,11 +3,22 @@ import 'package:flutter/foundation.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import 'package:routing_test/components/404/not_found_page.dart';
-import 'package:routing_test/components/app/routing/app_routes.dart';
 import 'package:routing_test/components/shell/shell.dart';
 import 'package:routing_test/features/auth/routing/auth_routes.dart';
+import 'package:routing_test/features/community/routing/community_routes.dart';
+import 'package:routing_test/features/discover/routing/discover_routes.dart';
+import 'package:routing_test/features/home/routing/home_routes.dart';
+import 'package:routing_test/features/you/routing/you_routes.dart';
+import 'package:routing_test/router/middleware.dart';
 
 class AppRouter {
+  AppRouter._();
+
+  static final instance = AppRouter._();
+
+  static const initRoute = HomeRoutes.home;
+  static const shellRoute = 'app';
+
   static init() {
     QR.settings.enableLog = false;
     QR.settings.globalMiddlewares.add(AuthMiddleware());
@@ -25,15 +36,20 @@ class AppRouter {
     [
       AuthRoutes().routes,
       QRoute.withChild(
-        name: AppRoutes.app,
-        path: AppRoutes.app,
-        initRoute: AppRoutes.initRoute,
+        name: shellRoute,
+        path: shellRoute,
+        initRoute: initRoute,
         builderChild: (router) => Shell(router: router),
-        children: AppRoutes().routes,
+        children: [
+          HomeRoutes().routes,
+          DiscoverRoutes().routes,
+          CommunityRoutes().routes,
+          YouRoutes().routes,
+        ],
         middleware: [QMiddlewareBuilder()],
       ),
     ],
     withWebBar: kDebugMode,
-    initPath: AppRoutes.app,
+    initPath: shellRoute,
   );
 }

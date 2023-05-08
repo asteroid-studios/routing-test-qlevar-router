@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import 'package:routing_test/components/app/routing/app_routes.dart';
-import 'package:routing_test/components/app/routing/meta.dart';
 import 'package:routing_test/components/shell/floating_player.dart';
 import 'package:routing_test/features/community/routing/community_routes.dart';
 import 'package:routing_test/features/discover/routing/discover_routes.dart';
 import 'package:routing_test/features/home/routing/home_routes.dart';
 import 'package:routing_test/features/you/routing/you_routes.dart';
+import 'package:routing_test/router/meta.dart';
+import 'package:routing_test/router/router.dart';
 
 class Shell extends HookWidget {
   const Shell({
@@ -25,9 +25,8 @@ class Shell extends HookWidget {
     final showBottomNav = useState(true);
 
     bool metaFromKey(String key) {
-      // Basically means if not login screen.
-      if (QR.currentRoute.name == AppRoutes.app) {
-        final currentRoute = QR.navigatorOf(AppRoutes.app).currentRoute;
+      if (QR.currentRoute.name == AppRouter.shellRoute) {
+        final currentRoute = QR.navigatorOf(AppRouter.shellRoute).currentRoute;
         return currentRoute.meta[key] as bool? ?? true;
       }
       return true;

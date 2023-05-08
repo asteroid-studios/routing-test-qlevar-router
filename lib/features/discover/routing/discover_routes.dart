@@ -1,8 +1,8 @@
 import 'package:qlevar_router/qlevar_router.dart';
 
-import 'package:routing_test/components/app/routing/meta.dart';
 import 'package:routing_test/features/discover/pages/discover/discover_page.dart';
 import 'package:routing_test/features/discover/pages/player/player_page.dart';
+import 'package:routing_test/router/meta.dart';
 
 class DiscoverRoutes {
   static const String discover = 'discover';
