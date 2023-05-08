@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routeInformationParser: AppRouter.parser,
-      routerDelegate: AppRouter.instance.router,
+      routerDelegate: AppRouter.instance.routerDelegate,
     );
   }
 }

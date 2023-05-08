@@ -4,10 +4,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import 'package:routing_test/components/shell/floating_player.dart';
-import 'package:routing_test/features/community/routing/community_routes.dart';
-import 'package:routing_test/features/discover/routing/discover_routes.dart';
-import 'package:routing_test/features/home/routing/home_routes.dart';
-import 'package:routing_test/features/you/routing/you_routes.dart';
+import 'package:routing_test/features/community/routes/community_routes.dart';
+import 'package:routing_test/features/discover/routes/discover_routes.dart';
+import 'package:routing_test/features/home/routes/home_routes.dart';
+import 'package:routing_test/features/you/routes/you_routes.dart';
 import 'package:routing_test/router/meta.dart';
 import 'package:routing_test/router/router.dart';
 

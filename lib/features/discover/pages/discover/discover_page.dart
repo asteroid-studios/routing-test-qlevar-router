@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:qlevar_router/qlevar_router.dart';
 
-import 'package:routing_test/features/discover/routing/discover_routes.dart';
+import 'package:routing_test/features/discover/routes/discover_routes.dart';
 
 class DiscoverPage extends StatelessWidget {
   const DiscoverPage({super.key});

@@ -4,11 +4,11 @@ import 'package:qlevar_router/qlevar_router.dart';
 
 import 'package:routing_test/components/404/not_found_page.dart';
 import 'package:routing_test/components/shell/shell.dart';
-import 'package:routing_test/features/auth/routing/auth_routes.dart';
-import 'package:routing_test/features/community/routing/community_routes.dart';
-import 'package:routing_test/features/discover/routing/discover_routes.dart';
-import 'package:routing_test/features/home/routing/home_routes.dart';
-import 'package:routing_test/features/you/routing/you_routes.dart';
+import 'package:routing_test/features/auth/routes/auth_routes.dart';
+import 'package:routing_test/features/community/routes/community_routes.dart';
+import 'package:routing_test/features/discover/routes/discover_routes.dart';
+import 'package:routing_test/features/home/routes/home_routes.dart';
+import 'package:routing_test/features/you/routes/you_routes.dart';
 import 'package:routing_test/router/middleware.dart';
 
 class AppRouter {
@@ -32,7 +32,7 @@ class AppRouter {
 
   static const parser = QRouteInformationParser();
 
-  final router = QRouterDelegate(
+  final routerDelegate = QRouterDelegate(
     [
       AuthRoutes().routes,
       QRoute.withChild(

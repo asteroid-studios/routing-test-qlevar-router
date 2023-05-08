@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:qlevar_router/qlevar_router.dart';
 
-import 'package:routing_test/features/auth/routing/auth_routes.dart';
+import 'package:routing_test/features/auth/routes/auth_routes.dart';
 import 'package:routing_test/features/auth/services/auth_service.dart';
-import 'package:routing_test/features/home/routing/home_routes.dart';
+import 'package:routing_test/features/home/routes/home_routes.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
