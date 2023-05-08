@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
             OutlinedButton(
               onPressed: () {
                 AuthService().login();
-                QR.toName(HomeRoutes.home);
+                QR.navigator.replaceAllWithName(HomeRoutes.home);
               },
               child: Text('LOGIN'),
             ),

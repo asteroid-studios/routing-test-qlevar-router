@@ -70,14 +70,13 @@ class Shell extends HookWidget {
               onTap: (index) {
                 final item = navBarItems[index];
                 if (QR.currentPath.contains(item.route)) {
-                  QR.toName(item.route);
+                  QR.back();
                 } else {
                   QR.toName(
                     item.route,
                     pageAlreadyExistAction: PageAlreadyExistAction.BringToTop,
                   );
                 }
-                navBarIndex.value = index;
               },
               items: navBarItems
                   .map(

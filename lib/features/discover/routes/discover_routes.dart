@@ -19,7 +19,6 @@ class DiscoverRoutes {
     name: discover,
     path: discover,
     pageType: const QFadePage(),
-    middleware: [QMiddlewareBuilder()],
     builder: () => const DiscoverPage(),
     children: [
       QRoute(

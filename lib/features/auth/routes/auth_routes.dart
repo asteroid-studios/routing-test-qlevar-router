@@ -9,7 +9,6 @@ class AuthRoutes {
     name: login,
     path: login,
     pageType: const QFadePage(),
-    middleware: [QMiddlewareBuilder()],
     builder: () => const LoginPage(),
   );
 }

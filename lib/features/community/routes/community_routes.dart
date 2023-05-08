@@ -9,7 +9,6 @@ class CommunityRoutes {
     name: community,
     path: community,
     pageType: const QFadePage(),
-    middleware: [QMiddlewareBuilder()],
     builder: () => const CommunityPage(),
   );
 }

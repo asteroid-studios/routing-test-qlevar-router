@@ -11,7 +11,6 @@ class HomeRoutes {
   final routes = QRoute(
     name: home,
     path: home,
-    middleware: [QMiddlewareBuilder()],
     pageType: const QFadePage(),
     builder: () => const HomePage(),
     children: [
@@ -21,7 +20,6 @@ class HomeRoutes {
         meta: {
           RouteMeta.showFloatingPlayer: false,
         },
-        middleware: [QMiddlewareBuilder()],
         builder: () => const FavouritesPage(),
       ),
     ],

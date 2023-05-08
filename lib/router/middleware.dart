@@ -9,7 +9,6 @@ class AuthMiddleware extends QMiddleware {
 
   @override
   Future<String?> redirectGuard(String path) async {
-    // print(path);
     // print(authService.loggedIn);
     if (authService.loggedIn) {
       if (path.contains(AuthRoutes.login)) {

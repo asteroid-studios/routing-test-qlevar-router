@@ -251,10 +251,11 @@ packages:
   qlevar_router:
     dependency: "direct main"
     description:
-      name: qlevar_router
-      sha256: "73ace1e019ec1be299d21379bafe475b3ab95ba9d7f4824efc634dec520999c5"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: f7abec273f697665f85a2a80ee14db8fa609a217
+      url: "https://github.com/asteroid-studios/qlevar_router.git"
+    source: git
     version: "1.9.0"
   sky_engine:
     dependency: transitive

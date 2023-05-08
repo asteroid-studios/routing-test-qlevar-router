@@ -25,9 +25,7 @@ class HomePage extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              // QR.navigatorOf(HomeRoutes.home).switchToName(HomeRoutes.favourites);
               QR.toName(HomeRoutes.favourites);
-              // QR.to('/home/favourites');
             },
             child: Text(
               'Favourites',
@@ -36,7 +34,7 @@ class HomePage extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               AuthService().logout();
-              QR.toName(AuthRoutes.login);
+              QR.navigator.replaceAllWithName(AuthRoutes.login);
             },
             child: Text(
               'LOGOUT',

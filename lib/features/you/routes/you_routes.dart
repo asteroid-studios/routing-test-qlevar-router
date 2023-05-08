@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 
 import 'package:qlevar_router/qlevar_router.dart';
 
@@ -11,15 +12,43 @@ class YouRoutes {
   final routes = QRoute(
     name: you,
     path: you,
-    middleware: [QMiddlewareBuilder()],
     builder: () => const YouPage(),
     pageType: const QFadePage(),
     children: [
       QRoute(
         name: settings,
         path: settings,
-        middleware: [QMiddlewareBuilder()],
         builder: () => const SettingsPage(),
+        middleware: [
+          QMiddlewareBuilder(
+            canPopFunc: () async {
+              if (QR.context != null) {
+                return await showDialog(
+                  context: QR.context!,
+                  builder: (context) {
+                    return Column(
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                          },
+                          child: Text('Pop'),
+                        ),
+                        OutlinedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false);
+                          },
+                          child: Text('Stay'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
+              return true;
+            },
+          ),
+        ],
       ),
     ],
   );

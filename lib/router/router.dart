@@ -17,9 +17,10 @@ class AppRouter {
   static final instance = AppRouter._();
 
   static const initRoute = HomeRoutes.home;
-  static const shellRoute = 'app';
+  static const shellRoute = '';
 
   static init() {
+    QR.setUrlStrategy();
     QR.settings.enableLog = false;
     QR.settings.globalMiddlewares.add(AuthMiddleware());
     QR.settings.autoRestoration = true;
@@ -46,7 +47,6 @@ class AppRouter {
           CommunityRoutes().routes,
           YouRoutes().routes,
         ],
-        middleware: [QMiddlewareBuilder()],
       ),
     ],
     withWebBar: kDebugMode,
