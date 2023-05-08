@@ -25,9 +25,12 @@ class Shell extends HookWidget {
     final showBottomNav = useState(true);
 
     bool metaFromKey(String key) {
-      final navigator = QR.navigatorOf(AppRoutes.app);
-      final metaData = navigator.currentRoute.meta;
-      return metaData[key] as bool? ?? true;
+      // Basically means if not login screen.
+      if (QR.currentRoute.name == AppRoutes.app) {
+        final currentRoute = QR.navigatorOf(AppRoutes.app).currentRoute;
+        return currentRoute.meta[key] as bool? ?? true;
+      }
+      return true;
     }
 
     int currentNavBarIndex() {
@@ -44,10 +47,10 @@ class Shell extends HookWidget {
 
     useEffect(() {
       updateShell();
-      QR.navigator.addListener(() {
-        updateShell();
-      });
-      return null;
+      QR.navigator.addListener(updateShell);
+      return () {
+        QR.navigator.removeListener(updateShell);
+      };
     }, []);
 
     return Scaffold(

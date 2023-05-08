@@ -18,10 +18,9 @@ class HomeRoutes {
       QRoute(
         name: favourites,
         path: favourites,
-        // meta: {
-        //   RouteMeta.showFloatingPlayer: false,
-        //   RouteMeta.showBottomNav: true,
-        // },
+        meta: {
+          RouteMeta.showFloatingPlayer: false,
+        },
         middleware: [QMiddlewareBuilder()],
         builder: () => const FavouritesPage(),
       ),

@@ -33,7 +33,7 @@ class AppRouter {
         middleware: [QMiddlewareBuilder()],
       ),
     ],
-    // withWebBar: kDebugMode,
+    withWebBar: kDebugMode,
     initPath: AppRoutes.app,
   );
 }
