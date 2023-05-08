@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:qlevar_router/qlevar_router.dart';
 
 import 'package:routing_test/components/404/not_found_page.dart';
@@ -23,6 +25,7 @@ class AppRouter {
     [
       AuthRoutes().routes,
       QRoute.withChild(
+        name: AppRoutes.app,
         path: AppRoutes.app,
         initRoute: AppRoutes.initRoute,
         builderChild: (router) => Shell(router: router),

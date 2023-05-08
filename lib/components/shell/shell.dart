@@ -1,74 +1,95 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import 'package:routing_test/features/auth/routing/auth_routes.dart';
+import 'package:routing_test/components/app/routing/app_routes.dart';
+import 'package:routing_test/components/app/routing/meta.dart';
+import 'package:routing_test/components/shell/floating_player.dart';
 import 'package:routing_test/features/community/routing/community_routes.dart';
 import 'package:routing_test/features/discover/routing/discover_routes.dart';
 import 'package:routing_test/features/home/routing/home_routes.dart';
 import 'package:routing_test/features/you/routing/you_routes.dart';
 
-class Shell extends StatefulWidget {
+class Shell extends HookWidget {
   const Shell({
     required this.router,
     super.key,
   });
 
   final QRouter router;
-
-  @override
-  State<Shell> createState() => _ShellState();
-}
-
-class _ShellState extends State<Shell> {
-  late int navBarIndex;
-
-  @override
-  void initState() {
-    // TODO listen to route changes and update navBarIndex
-    // for back button navigation
-    final index = navBarItems.indexWhere(
-      (item) => QR.currentPath.contains(item.route),
-    );
-    navBarIndex = index == -1 ? 0 : index;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final navBarIndex = useState(0);
+    final showFloatingPlayer = useState(true);
+    final showBottomNav = useState(true);
+
+    bool metaFromKey(String key) {
+      final navigator = QR.navigatorOf(AppRoutes.app);
+      final metaData = navigator.currentRoute.meta;
+      return metaData[key] as bool? ?? true;
+    }
+
+    int currentNavBarIndex() {
+      final index =
+          navBarItems.indexWhere((item) => QR.currentPath.contains(item.route));
+      return index == -1 ? 0 : index;
+    }
+
+    void updateShell() {
+      navBarIndex.value = currentNavBarIndex();
+      showFloatingPlayer.value = metaFromKey(RouteMeta.showFloatingPlayer);
+      showBottomNav.value = metaFromKey(RouteMeta.showBottomNav);
+    }
+
+    useEffect(() {
+      updateShell();
+      QR.navigator.addListener(() {
+        updateShell();
+      });
+      return null;
+    }, []);
+
     return Scaffold(
       body: Column(
         children: [
-          Expanded(child: widget.router),
+          Expanded(child: router),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
-        unselectedItemColor: Colors.lightBlueAccent,
-        currentIndex: navBarIndex,
-        onTap: (index) {
-          final item = navBarItems[index];
-          if (QR.currentPath.contains(item.route)) {
-            QR.toName(item.route);
-          } else {
-            QR.toName(
-              item.route,
-              pageAlreadyExistAction: PageAlreadyExistAction.BringToTop,
-            );
-          }
-          setState(() => navBarIndex = index);
-        },
-        items: navBarItems
-            .map(
-              (i) => BottomNavigationBarItem(
-                backgroundColor: Colors.blue,
-                label: i.label,
-                icon: Icon(
-                  i.icon,
-                ),
-              ),
-            )
-            .toList(),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (showFloatingPlayer.value) const FloatingPlayer(),
+          if (showBottomNav.value)
+            BottomNavigationBar(
+              showUnselectedLabels: true,
+              unselectedItemColor: Colors.lightBlueAccent,
+              currentIndex: navBarIndex.value,
+              onTap: (index) {
+                final item = navBarItems[index];
+                if (QR.currentPath.contains(item.route)) {
+                  QR.toName(item.route);
+                } else {
+                  QR.toName(
+                    item.route,
+                    pageAlreadyExistAction: PageAlreadyExistAction.BringToTop,
+                  );
+                }
+                navBarIndex.value = index;
+              },
+              items: navBarItems
+                  .map(
+                    (i) => BottomNavigationBarItem(
+                      backgroundColor: Colors.blue,
+                      label: i.label,
+                      icon: Icon(
+                        i.icon,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+        ],
       ),
     );
   }

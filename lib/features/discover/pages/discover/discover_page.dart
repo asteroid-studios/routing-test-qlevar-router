@@ -31,10 +31,11 @@ class DiscoverPage extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              QR.toName(
-                DiscoverRoutes.content,
-                params: {'id': '2'},
-              );
+              DiscoverRoutes.toPlayer('2');
+              // QR.toName(
+              //   DiscoverRoutes.content,
+              //   params: {'id': '2'},
+              // );
             },
             child: Text(
               'play episode 2',
