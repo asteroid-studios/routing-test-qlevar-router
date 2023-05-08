@@ -24,6 +24,12 @@ class AppRouter {
     QR.settings.enableLog = false;
     QR.settings.globalMiddlewares.add(AuthMiddleware());
     QR.settings.autoRestoration = true;
+    // Example of global observer, can also add per navigator
+    QR.observer.onNavigate.add((path, route) async {
+      if (path.isNotEmpty && path != '/') {
+        print(path);
+      }
+    });
     // QR.settings.initPage = CircularProgressIndicator();
     QR.settings.notFoundPage = QRoute(
       path: '/404',
