@@ -70,7 +70,11 @@ class Shell extends HookWidget {
               onTap: (index) {
                 final item = navBarItems[index];
                 if (QR.currentPath.contains(item.route)) {
-                  QR.back();
+                  if (QR.currentPath.replaceAll('/', '') == item.route) {
+                    print('SCROLL TO TOP');
+                  } else {
+                    QR.back();
+                  }
                 } else {
                   QR.toName(
                     item.route,
