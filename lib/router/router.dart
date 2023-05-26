@@ -1,61 +1,112 @@
-import 'package:flutter/foundation.dart';
+import 'package:auto_route/auto_route.dart';
 
-import 'package:qlevar_router/qlevar_router.dart';
+import 'package:routing_test/features/auth/services/auth_service.dart';
+import 'package:routing_test/router/router.gr.dart';
+export 'package:routing_test/router/router.gr.dart';
+export 'package:auto_route/auto_route.dart';
 
-import 'package:routing_test/components/404/not_found_page.dart';
-import 'package:routing_test/components/shell/shell.dart';
-import 'package:routing_test/features/auth/routes/auth_routes.dart';
-import 'package:routing_test/features/community/routes/community_routes.dart';
-import 'package:routing_test/features/discover/routes/discover_routes.dart';
-import 'package:routing_test/features/home/routes/home_routes.dart';
-import 'package:routing_test/features/you/routes/you_routes.dart';
-import 'package:routing_test/router/middleware.dart';
+class RouteMeta {
+  static const String showBottomNav = 'showBottomNav';
+  static const String showFloatingPlayer = 'showFloatingPlayer';
+}
 
-class AppRouter {
+@AutoRouterConfig()
+class AppRouter extends $AppRouter implements AutoRouteGuard {
   AppRouter._();
 
   static final instance = AppRouter._();
 
-  static const initRoute = HomeRoutes.home;
-  static const shellRoute = '';
+  final authService = AuthService();
 
-  static init() {
-    QR.setUrlStrategy();
-    QR.settings.enableLog = false;
-    QR.settings.globalMiddlewares.add(AuthMiddleware());
-    QR.settings.autoRestoration = true;
-    // Example of global observer, can also add per navigator
-    QR.observer.onNavigate.add((path, route) async {
-      if (path.isNotEmpty && path != '/') {
-        print(path);
+  @override
+  List<AutoRoute> get routes => [
+        AutoRoute(
+          path: '/',
+          page: Shell.page,
+          children: [
+            AutoRoute(
+              page: HomeTab.page,
+              path: '',
+              children: [
+                AutoRoute(page: HomeRoute.page, path: ''),
+                AutoRoute(
+                  page: FavouritesRoute.page,
+                  path: 'favourites',
+                  meta: const {RouteMeta.showFloatingPlayer: false},
+                ),
+              ],
+            ),
+            AutoRoute(
+              page: DiscoverTab.page,
+              path: 'discover',
+              children: [
+                AutoRoute(page: DiscoverRoute.page, path: ''),
+                AutoRoute(page: PlayerRoute.page, path: ':id'),
+              ],
+            ),
+            AutoRoute(
+              page: CommunityTab.page,
+              path: 'community',
+              children: [
+                AutoRoute(page: CommunityRoute.page, path: ''),
+                AutoRoute(page: PostRoute.page, path: 'post/:id'),
+                AutoRoute(
+                  page: ThreadRoute.page,
+                  path: 'post/:postId/thread/:id',
+                ),
+              ],
+            ),
+            AutoRoute(
+              page: YouTab.page,
+              path: 'you',
+              children: [
+                AutoRoute(page: YouRoute.page, path: ''),
+              ],
+            ),
+          ],
+        ),
+        AutoRoute(
+          path: '/login',
+          page: LoginRoute.page,
+        ),
+        AutoRoute(
+          path: '/account',
+          page: AccountRoute.page,
+        ),
+      ];
+
+  @override
+  void onNavigation(NavigationResolver resolver, StackRouter router) {
+    if (authService.loggedIn) {
+      if (resolver.route.name == LoginRoute.name) {
+        push(const HomeRoute());
+      } else {
+        resolver.next();
       }
-    });
-    // QR.settings.initPage = CircularProgressIndicator();
-    QR.settings.notFoundPage = QRoute(
-      path: '/404',
-      builder: () => const NotFoundPage(),
-    );
+    } else if (resolver.route.name != LoginRoute.name) {
+      push(const LoginRoute());
+    } else {
+      resolver.next();
+    }
   }
+}
 
-  static const parser = QRouteInformationParser();
+@RoutePage(name: 'HomeTab')
+class HomeTabPage extends AutoRouter {
+  const HomeTabPage({super.key});
+}
 
-  final routerDelegate = QRouterDelegate(
-    [
-      AuthRoutes().routes,
-      QRoute.withChild(
-        name: shellRoute,
-        path: shellRoute,
-        initRoute: initRoute,
-        builderChild: (router) => Shell(router: router),
-        children: [
-          HomeRoutes().routes,
-          DiscoverRoutes().routes,
-          CommunityRoutes().routes,
-          YouRoutes().routes,
-        ],
-      ),
-    ],
-    withWebBar: kDebugMode,
-    initPath: shellRoute,
-  );
+@RoutePage(name: 'DiscoverTab')
+class DiscoverTabPage extends AutoRouter {
+  const DiscoverTabPage({super.key});
+}
+
+@RoutePage(name: 'CommunityTab')
+class CommunityTabPage extends AutoRouter {
+  const CommunityTabPage({super.key});
+}
+
+@RoutePage(name: 'YouTab')
+class YouTabPage extends AutoRouter {
+  const YouTabPage({super.key});
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:qlevar_router/qlevar_router.dart';
+import 'package:routing_test/router/router.dart';
 
-import 'package:routing_test/features/you/routes/you_routes.dart';
-
+@RoutePage()
 class YouPage extends StatelessWidget {
   const YouPage({super.key});
 
@@ -19,9 +18,15 @@ class YouPage extends StatelessWidget {
         ),
         OutlinedButton(
           onPressed: () {
-            QR.toName(YouRoutes.settings);
+            // QR.toName(YouRoutes.settings);
           },
           child: Text('SETTINGS'),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            context.navigateTo(const AccountRoute());
+          },
+          child: Text('Account'),
         ),
       ],
     );

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:routing_test/router/router.dart';
+
+@RoutePage()
 class PlayerPage extends StatelessWidget {
   const PlayerPage({
-    required this.id,
+    @pathParam required this.id,
     super.key,
   });
 

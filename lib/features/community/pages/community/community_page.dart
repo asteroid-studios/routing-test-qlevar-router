@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+import 'package:routing_test/router/router.dart';
+
+@RoutePage()
 class CommunityPage extends StatelessWidget {
   const CommunityPage({super.key});
 
@@ -43,6 +47,14 @@ class CommunityPage extends StatelessWidget {
             );
           },
           child: Text('OPEN MODAL'),
+        ),
+        OutlinedButton(
+          onPressed: () {
+            context.navigateTo(
+              PostRoute(id: 'afsj9299f'),
+            );
+          },
+          child: Text('Open Post'),
         ),
       ],
     );

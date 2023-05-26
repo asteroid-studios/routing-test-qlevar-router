@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:qlevar_router/qlevar_router.dart';
-
-import 'package:routing_test/features/auth/routes/auth_routes.dart';
 import 'package:routing_test/features/auth/services/auth_service.dart';
-import 'package:routing_test/features/home/routes/home_routes.dart';
+import 'package:routing_test/router/router.dart';
 
+@RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -25,7 +23,7 @@ class HomePage extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              QR.toName(HomeRoutes.favourites);
+              context.navigateTo(const FavouritesRoute());
             },
             child: Text(
               'Favourites',
@@ -34,7 +32,7 @@ class HomePage extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               AuthService().logout();
-              QR.navigator.replaceAllWithName(AuthRoutes.login);
+              context.pushRoute(const LoginRoute());
             },
             child: Text(
               'LOGOUT',

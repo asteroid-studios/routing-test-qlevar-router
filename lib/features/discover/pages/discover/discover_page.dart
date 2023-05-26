@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:qlevar_router/qlevar_router.dart';
+import 'package:routing_test/router/router.dart';
 
-import 'package:routing_test/features/discover/routes/discover_routes.dart';
-
+@RoutePage()
 class DiscoverPage extends StatelessWidget {
   const DiscoverPage({super.key});
 
@@ -20,10 +19,7 @@ class DiscoverPage extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              QR.toName(
-                DiscoverRoutes.content,
-                params: {'id': '1'},
-              );
+              context.navigateTo(PlayerRoute(id: '1'));
             },
             child: Text(
               'play episode 1',
@@ -31,11 +27,7 @@ class DiscoverPage extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
-              DiscoverRoutes.toPlayer('2');
-              // QR.toName(
-              //   DiscoverRoutes.content,
-              //   params: {'id': '2'},
-              // );
+              context.navigateTo(PlayerRoute(id: '2'));
             },
             child: Text(
               'play episode 2',
