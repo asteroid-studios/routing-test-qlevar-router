@@ -13,53 +13,49 @@ class Shell extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return AutoRouter(builder: (context, child) {
-    //   // we check for active route index by using
-    //   // router.isRouteActive method
-    //   var activeIndex = navBarItems.indexWhere(
-    //     (d) => context.router.isRouteActive(d.route.routeName),
-    //   );
-    //   // there might be no active route until router is mounted
-    //   // so we play safe
-    //   if (activeIndex == -1) {
-    //     activeIndex = 0;
-    //   }
-    //   return Scaffold(
-    //     body: Row(
-    //       children: [
-    //         NavigationRail(
-    //           destinations: navBarItems
-    //               .map((item) => NavigationRailDestination(
-    //                     icon: Icon(item.icon),
-    //                     label: Text(item.label),
-    //                   ))
-    //               .toList(),
-    //           selectedIndex: activeIndex,
-    //           onDestinationSelected: (index) {
-    //             // use navigate instead of push so you won't have
-    //             // many useless route stacks
-    //             context.navigateTo(navBarItems[index].route);
-    //           },
-    //         ),
-    //         // child is the rendered route stack
-    //         Expanded(child: child)
-    //       ],
-    //     ),
-    //   );
-    // });
+    // return AutoRouter(
+    //   builder: (context, child) {
+    //     // we check for active route index by using
+    //     // router.isRouteActive method
+    //     var activeIndex = navBarItems.indexWhere(
+    //       (d) => context.router.isRouteActive(d.route.routeName),
+    //     );
+    //     // there might be no active route until router is mounted
+    //     // so we play safe
+    //     if (activeIndex == -1) {
+    //       activeIndex = 0;
+    //     }
+    //     return Scaffold(
+    //       body: Row(
+    //         children: [
+    //           NavigationRail(
+    //             destinations: navBarItems
+    //                 .map((item) => NavigationRailDestination(
+    //                       icon: Icon(item.icon),
+    //                       label: Text(item.label),
+    //                     ))
+    //                 .toList(),
+    //             selectedIndex: activeIndex,
+    //             onDestinationSelected: (index) {
+    //               // use navigate instead of push so you won't have
+    //               // many useless route stacks
+    //               context.navigateTo(navBarItems[index].route);
+    //             },
+    //           ),
+    //           // child is the rendered route stack
+    //           Expanded(child: child)
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
 
-    var activeIndex = navBarItems.indexWhere(
-      (d) => context.router.isRouteActive(d.route.routeName),
-    );
-    // there might be no active route until router is mounted
-    // so we play safe
-    if (activeIndex == -1) {
-      activeIndex = 0;
-    }
+    // xcrun simctl openurl booted https://lived.app.link/community/post/afsj9299f/thread/fterwfsd
+    // xcrun simctl openurl booted https://lived.app.link/community
+    // xcrun simctl openurl booted https://lived.app.link/account
 
     return AutoTabsRouter(
-      homeIndex: activeIndex,
-      routes: const [
+      routes: [
         HomeRoute(),
         DiscoverRoute(),
         CommunityRoute(),
@@ -79,10 +75,12 @@ class Shell extends HookWidget {
         final showBottomNav =
             currentRoute.meta[RouteMeta.showBottomNav] as bool? ?? true;
         return Scaffold(
-          body: Column(
-            children: [
-              Expanded(child: child),
-            ],
+          body: SafeArea(
+            child: Column(
+              children: [
+                Expanded(child: child),
+              ],
+            ),
           ),
           bottomNavigationBar: Column(
             mainAxisSize: MainAxisSize.min,

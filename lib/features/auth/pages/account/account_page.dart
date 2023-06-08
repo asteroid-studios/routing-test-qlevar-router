@@ -17,6 +17,12 @@ class AccountPage extends StatelessWidget {
             SizedBox(height: 20),
             OutlinedButton(
               onPressed: () {
+                context.navigateNamedTo('/login');
+              },
+              child: Text('Logout'),
+            ),
+            OutlinedButton(
+              onPressed: () {
                 context.back();
               },
               child: Text('BACK'),

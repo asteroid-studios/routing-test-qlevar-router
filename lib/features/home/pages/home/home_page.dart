@@ -23,6 +23,14 @@ class HomePage extends StatelessWidget {
           ),
           OutlinedButton(
             onPressed: () {
+              context.navigateNamedTo('/account');
+            },
+            child: Text(
+              'BY PATH',
+            ),
+          ),
+          OutlinedButton(
+            onPressed: () {
               context.navigateTo(const FavouritesRoute());
             },
             child: Text(

@@ -24,9 +24,12 @@ class AppRouter extends $AppRouter implements AutoRouteGuard {
           path: '/',
           page: Shell.page,
           children: [
+            // TODO submit an issue where navigation breaks when making the path ''
+            // instead of say home
+            RedirectRoute(path: '', redirectTo: 'home'),
             AutoRoute(
               page: HomeTab.page,
-              path: '',
+              path: 'home',
               children: [
                 AutoRoute(page: HomeRoute.page, path: ''),
                 AutoRoute(
@@ -73,6 +76,7 @@ class AppRouter extends $AppRouter implements AutoRouteGuard {
           path: '/account',
           page: AccountRoute.page,
         ),
+        RedirectRoute(path: '*', redirectTo: '/'),
       ];
 
   @override

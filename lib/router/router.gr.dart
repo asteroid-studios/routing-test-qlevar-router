@@ -10,16 +10,16 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i13;
 import 'package:flutter/material.dart' as _i14;
-import 'package:routing_test/components/shell/shell.dart' as _i8;
+import 'package:routing_test/components/shell/shell.dart' as _i11;
 import 'package:routing_test/features/auth/pages/account/account_page.dart'
-    as _i10;
-import 'package:routing_test/features/auth/pages/login/login_page.dart' as _i5;
+    as _i5;
+import 'package:routing_test/features/auth/pages/login/login_page.dart' as _i6;
 import 'package:routing_test/features/community/pages/community/community_page.dart'
-    as _i7;
+    as _i9;
 import 'package:routing_test/features/community/pages/post/post_page.dart'
-    as _i11;
+    as _i8;
 import 'package:routing_test/features/community/pages/thread/thread_page.dart'
-    as _i12;
+    as _i10;
 import 'package:routing_test/features/discover/pages/discover/discover_page.dart'
     as _i3;
 import 'package:routing_test/features/discover/pages/player/player_page.dart'
@@ -27,8 +27,8 @@ import 'package:routing_test/features/discover/pages/player/player_page.dart'
 import 'package:routing_test/features/home/pages/favourites/favourites_page.dart'
     as _i2;
 import 'package:routing_test/features/home/pages/home/home_page.dart' as _i1;
-import 'package:routing_test/features/you/pages/you/you_page.dart' as _i6;
-import 'package:routing_test/router/router.dart' as _i9;
+import 'package:routing_test/features/you/pages/you/you_page.dart' as _i7;
+import 'package:routing_test/router/router.dart' as _i12;
 
 abstract class $AppRouter extends _i13.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -65,58 +65,22 @@ abstract class $AppRouter extends _i13.RootStackRouter {
         ),
       );
     },
+    AccountRoute.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i5.AccountPage(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.LoginPage(),
+        child: const _i6.LoginPage(),
       );
     },
     YouRoute.name: (routeData) {
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.YouPage(),
-      );
-    },
-    CommunityRoute.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i7.CommunityPage(),
-      );
-    },
-    Shell.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i8.Shell(),
-      );
-    },
-    HomeTab.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i9.HomeTabPage(),
-      );
-    },
-    DiscoverTab.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i9.DiscoverTabPage(),
-      );
-    },
-    CommunityTab.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i9.CommunityTabPage(),
-      );
-    },
-    YouTab.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i9.YouTabPage(),
-      );
-    },
-    AccountRoute.name: (routeData) {
-      return _i13.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i10.AccountPage(),
+        child: const _i7.YouPage(),
       );
     },
     PostRoute.name: (routeData) {
@@ -125,10 +89,16 @@ abstract class $AppRouter extends _i13.RootStackRouter {
           orElse: () => PostRouteArgs(id: pathParams.getString('id')));
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i11.PostPage(
+        child: _i8.PostPage(
           id: args.id,
           key: args.key,
         ),
+      );
+    },
+    CommunityRoute.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i9.CommunityPage(),
       );
     },
     ThreadRoute.name: (routeData) {
@@ -140,11 +110,41 @@ abstract class $AppRouter extends _i13.RootStackRouter {
               ));
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i12.ThreadPage(
+        child: _i10.ThreadPage(
           id: args.id,
           postId: args.postId,
           key: args.key,
         ),
+      );
+    },
+    Shell.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i11.Shell(),
+      );
+    },
+    HomeTab.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i12.HomeTabPage(),
+      );
+    },
+    DiscoverTab.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i12.DiscoverTabPage(),
+      );
+    },
+    CommunityTab.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i12.CommunityTabPage(),
+      );
+    },
+    YouTab.name: (routeData) {
+      return _i13.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i12.YouTabPage(),
       );
     },
   };
@@ -232,119 +232,7 @@ class PlayerRouteArgs {
 }
 
 /// generated route for
-/// [_i5.LoginPage]
-class LoginRoute extends _i13.PageRouteInfo<void> {
-  const LoginRoute({List<_i13.PageRouteInfo>? children})
-      : super(
-          LoginRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'LoginRoute';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i6.YouPage]
-class YouRoute extends _i13.PageRouteInfo<void> {
-  const YouRoute({List<_i13.PageRouteInfo>? children})
-      : super(
-          YouRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'YouRoute';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i7.CommunityPage]
-class CommunityRoute extends _i13.PageRouteInfo<void> {
-  const CommunityRoute({List<_i13.PageRouteInfo>? children})
-      : super(
-          CommunityRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CommunityRoute';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i8.Shell]
-class Shell extends _i13.PageRouteInfo<void> {
-  const Shell({List<_i13.PageRouteInfo>? children})
-      : super(
-          Shell.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'Shell';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i9.HomeTabPage]
-class HomeTab extends _i13.PageRouteInfo<void> {
-  const HomeTab({List<_i13.PageRouteInfo>? children})
-      : super(
-          HomeTab.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'HomeTab';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i9.DiscoverTabPage]
-class DiscoverTab extends _i13.PageRouteInfo<void> {
-  const DiscoverTab({List<_i13.PageRouteInfo>? children})
-      : super(
-          DiscoverTab.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'DiscoverTab';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i9.CommunityTabPage]
-class CommunityTab extends _i13.PageRouteInfo<void> {
-  const CommunityTab({List<_i13.PageRouteInfo>? children})
-      : super(
-          CommunityTab.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CommunityTab';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i9.YouTabPage]
-class YouTab extends _i13.PageRouteInfo<void> {
-  const YouTab({List<_i13.PageRouteInfo>? children})
-      : super(
-          YouTab.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'YouTab';
-
-  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i10.AccountPage]
+/// [_i5.AccountPage]
 class AccountRoute extends _i13.PageRouteInfo<void> {
   const AccountRoute({List<_i13.PageRouteInfo>? children})
       : super(
@@ -358,7 +246,35 @@ class AccountRoute extends _i13.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.PostPage]
+/// [_i6.LoginPage]
+class LoginRoute extends _i13.PageRouteInfo<void> {
+  const LoginRoute({List<_i13.PageRouteInfo>? children})
+      : super(
+          LoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i7.YouPage]
+class YouRoute extends _i13.PageRouteInfo<void> {
+  const YouRoute({List<_i13.PageRouteInfo>? children})
+      : super(
+          YouRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'YouRoute';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i8.PostPage]
 class PostRoute extends _i13.PageRouteInfo<PostRouteArgs> {
   PostRoute({
     required String id,
@@ -397,7 +313,21 @@ class PostRouteArgs {
 }
 
 /// generated route for
-/// [_i12.ThreadPage]
+/// [_i9.CommunityPage]
+class CommunityRoute extends _i13.PageRouteInfo<void> {
+  const CommunityRoute({List<_i13.PageRouteInfo>? children})
+      : super(
+          CommunityRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CommunityRoute';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i10.ThreadPage]
 class ThreadRoute extends _i13.PageRouteInfo<ThreadRouteArgs> {
   ThreadRoute({
     required String id,
@@ -441,4 +371,74 @@ class ThreadRouteArgs {
   String toString() {
     return 'ThreadRouteArgs{id: $id, postId: $postId, key: $key}';
   }
+}
+
+/// generated route for
+/// [_i11.Shell]
+class Shell extends _i13.PageRouteInfo<void> {
+  const Shell({List<_i13.PageRouteInfo>? children})
+      : super(
+          Shell.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Shell';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i12.HomeTabPage]
+class HomeTab extends _i13.PageRouteInfo<void> {
+  const HomeTab({List<_i13.PageRouteInfo>? children})
+      : super(
+          HomeTab.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeTab';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i12.DiscoverTabPage]
+class DiscoverTab extends _i13.PageRouteInfo<void> {
+  const DiscoverTab({List<_i13.PageRouteInfo>? children})
+      : super(
+          DiscoverTab.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DiscoverTab';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i12.CommunityTabPage]
+class CommunityTab extends _i13.PageRouteInfo<void> {
+  const CommunityTab({List<_i13.PageRouteInfo>? children})
+      : super(
+          CommunityTab.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CommunityTab';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i12.YouTabPage]
+class YouTab extends _i13.PageRouteInfo<void> {
+  const YouTab({List<_i13.PageRouteInfo>? children})
+      : super(
+          YouTab.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'YouTab';
+
+  static const _i13.PageInfo<void> page = _i13.PageInfo<void>(name);
 }
